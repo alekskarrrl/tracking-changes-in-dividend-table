@@ -1,0 +1,4 @@
+# Ignore config file
+*config*
+
+__pycache__
