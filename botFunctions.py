@@ -9,6 +9,7 @@ pd.set_option('display.max_columns', 150)
 pd.set_option('display.max_rows', 300)
 from bs4 import BeautifulSoup
 import requests as req
+import time
 #from telegram.ext import Updater
 #from telegram.ext import CommandHandler, CallbackContext
 import config
@@ -70,7 +71,7 @@ def parse_div_table():  # ready for using
 def compare_table(df_curr, df_new):
     if df_curr.compare(df_new, align_axis=0, keep_equal=True).empty:
         #print("No changes in table")
-        return pd.DataFrame()
+        return "No changes in table"
     else:
         df_mask_fill = df_curr.compare(df_new, align_axis=0, keep_shape = True, keep_equal=True)
         df_mask = df_curr.compare(df_new, align_axis=0, keep_shape = True)
