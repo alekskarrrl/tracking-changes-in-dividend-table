@@ -4,9 +4,9 @@ Created on Wed Mar 24 04:05:02 2021
 @author: User
 """
 
-bot_token = BOT_TOKEN
+bot_token = '1600665665:AAGt4hoI7vC_iJM7Bb_ge7HsopXzke4s_Ss'
 
-bot_chatID = BOT_GROUP_CHAT_ID
+bot_chatID = '281231111'
 
 
 #bot_chatID = BOT_CHAT_ID
