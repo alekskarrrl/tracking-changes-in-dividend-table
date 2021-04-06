@@ -1,1 +1,1 @@
-web: gunicorn div_table_update.py:app
+web: gunicorn div_table_update:app
