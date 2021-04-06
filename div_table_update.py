@@ -12,7 +12,6 @@ import requests as req
 import time
 #from telegram.ext import Updater
 #from telegram.ext import CommandHandler, CallbackContext
-import config
 from botFunctions import parse_div_table, compare_table, create_text_message
 import streamlit as st
 import os

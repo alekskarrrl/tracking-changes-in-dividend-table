@@ -11,7 +11,6 @@ from bs4 import BeautifulSoup
 import requests as req
 #from telegram.ext import Updater
 #from telegram.ext import CommandHandler, CallbackContext
-import config
 
 
 
