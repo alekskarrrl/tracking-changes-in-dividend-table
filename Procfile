@@ -1,1 +1,1 @@
-web: gunicorn div_table_update:app
+worker: python div_table_update.py $PORT
