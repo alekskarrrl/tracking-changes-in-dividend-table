@@ -1,1 +1,1 @@
-web: streamlit run div_table_update.py
+web: gunicorn div_table_update.py:app
