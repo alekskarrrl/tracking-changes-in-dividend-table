@@ -15,13 +15,14 @@ import time
 import config
 from botFunctions import parse_div_table, compare_table, create_text_message
 import streamlit as st
+import os
 
 
 # ---------------Telegram API------------------
 
 def telegram_bot_sendtext(bot_message):
     
-    send_text = 'https://api.telegram.org/bot' + config.bot_token + '/sendMessage?chat_id=' + config.bot_chatID + '&parse_mode=Markdown&text=' + bot_message
+    send_text = 'http://api.telegram.org/bot' + os.environ.get('bot_token') + '/sendMessage?chat_id=' + os.environ.get('bot_chatID') + '&parse_mode=Markdown&text=' + bot_message
 
     response = req.get(send_text)
 

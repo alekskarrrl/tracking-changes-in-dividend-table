@@ -1,4 +1,5 @@
 # Ignore config file
 config.py
+*.bat
 
 __pycache__/

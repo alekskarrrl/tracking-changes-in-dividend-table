@@ -19,7 +19,7 @@ import config
 
 # --------------definition parse_div_table -----------------------------
 def parse_div_table():  # ready for using
-    resp = req.get("https://www.dohod.ru/ik/analytics/dividend")
+    resp = req.get("http://www.dohod.ru/ik/analytics/dividend")
     soup = BeautifulSoup(resp.text, 'lxml')
     root = soup.tbody
     root_childs = [e for e in root.children if e.name is not None]
