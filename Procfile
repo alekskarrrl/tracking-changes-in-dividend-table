@@ -1,0 +1,1 @@
+web:streamlit run div_table_update.py
