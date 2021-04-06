@@ -1,1 +1,1 @@
-web:streamlit run div_table_update.py
+web: streamlit run div_table_update.py
