@@ -17,12 +17,13 @@ import streamlit as st
 import os
 
 
+
 # ---------------Telegram API------------------
 
 def telegram_bot_sendtext(bot_message):
     
-    send_text = 'http://api.telegram.org/bot' + os.environ.get('bot_token') + '/sendMessage?chat_id=' + os.environ.get('bot_chatID') + '&parse_mode=Markdown&text=' + bot_message
-
+    send_text = 'http://api.telegram.org/bot' + os.getenv('bot_token') + '/sendMessage?chat_id=' + os.getenv('bot_chatID') + '&parse_mode=Markdown&text=' + bot_message
+    
     response = req.get(send_text)
 
     return response.json()
@@ -40,7 +41,7 @@ st.header("Updated table (from web page): ")
 st.write(df_new)
 
 while True:
-    time.sleep(30)
+    
     
     
     df_new = parse_div_table()
@@ -64,8 +65,12 @@ while True:
     
     #text_message = create_text_message(df_diff)
     
+    
+    
     test = telegram_bot_sendtext(text_message)
-    print(test)
+    #print(test)
+    
+    time.sleep(30)
     
     
 # df_new = parse_div_table()
