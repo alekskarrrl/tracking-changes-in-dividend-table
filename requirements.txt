@@ -15,4 +15,3 @@ nest-asyncio==1.4.2
 aiohttp==3.7.4.post0
 alpaca-trade-api==1.0.1
 altair==4.1.0
-lxml==4.6.3
