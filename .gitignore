@@ -1,5 +1,7 @@
 # Ignore config file
 config.py
 *.bat
+envv/
+.idea/
 
 __pycache__/
