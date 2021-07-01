@@ -4,11 +4,14 @@ Created on Sat Apr  3 05:38:13 2021
 
 @author: User
 """
+import numpy as np
 import pandas as pd
 pd.set_option('display.max_columns', 150)
 pd.set_option('display.max_rows', 300)
 from bs4 import BeautifulSoup
 import requests as req
+
+
 #from telegram.ext import Updater
 #from telegram.ext import CommandHandler, CallbackContext
 
@@ -56,9 +59,13 @@ def parse_div_table():  # ready for using
     div_table['Прогноз прибыли в след. 12m'] = div_table['Прогноз прибыли в след. 12m'].astype('float').round(2)
     div_table['Доля от прибыли'] = div_table['Доля от прибыли'].astype('float').round(2)
     div_table['Кол-во акций в обращении, млн. шт.'] = div_table['Кол-во акций в обращении, млн. шт.'].astype('float').round(2)
+    div_table['concat_column'] = div_table['Акция'] + " " + div_table['Период']
     
-    div_table.sort_values(by=['Акция', 'Сектор', 'Период'], inplace=True)
-    div_table.reset_index(drop=True, inplace=True)
+    #div_table.sort_values(by=['concat_column'], inplace=True)
+    #div_table.set_index('concat_column', inplace=True)
+    div_table.set_index('concat_column', inplace=True)
+    #div_table.drop(div_table.columns[0], inplace=True)
+    div_table.sort_index(inplace=True)
     return  div_table
     
 # --------------definition parse_div_table END -----------------------------
@@ -67,7 +74,9 @@ def parse_div_table():  # ready for using
 # --------------definition compare_table -----------------------------
 
 def compare_table(df_curr, df_new):
+
     if df_curr.compare(df_new, align_axis=0, keep_equal=True).empty:
+
         #print("No changes in table")
         return pd.DataFrame()
     else:
@@ -86,8 +95,6 @@ def compare_table(df_curr, df_new):
         return df_diff_short.combine_first(df_mask_fill.loc[ind_lvl_1])        
          
     
-    
-
 
 # --------------definition compare_table  END -----------------------------
 
@@ -105,18 +112,15 @@ def create_text_message(df):
     for ind in ind_lvl_1:
         show_stock_name = True
         for col in df.columns.values:
-            if (df.loc[(ind, 'self'), col] != df.loc[(ind, 'other'), col]):
+            if (df.loc[(ind, 'other'), col] != 'nan' and df.loc[(ind, 'self'), col] != df.loc[(ind, 'other'), col]):
                 if show_stock_name:
-                    text = text + str(df.loc[(ind, 'self'), 'Акция']) + ': \n'
+                    text = text + str(ind) + ': \n'
+                    #text = text + str(df.loc[(ind, 'self'), 'Акция']) + ': \n'
                 text = text + col +': ' + 'before ' + str(df.loc[(ind, 'self'), col]) + ', now ' +  str(df.loc[(ind, 'other'), col]) + '\n'
                 show_stock_name = False
         text = text + '\n'
         #print(ind_lvl_1)
     return text
-
-
-
-
 
 
 #-------------------create_text_message END------------------------------------
